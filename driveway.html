@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html ng-app="driveway">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<meta charset="utf-8">
+	<title>Driveway</title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="driveway.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+</head>
+<body ng-controller="drivewayController">
+	
+<nav class="navbar navbar-default" style="background-color:#ecf0f1">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+     <a class="navbar-brand" href="#">Driveway</a> 
+     
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+       
+      </button>
+     
+    </div>
+
+    <!-- <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>             is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div> -->
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    
+      <ul class="nav navbar-nav navbar-right">
+        <li><a ng-click="showAddressForm()" href="#">Rent Your Spot</a></li>
+      
+          </ul>
+    
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+
+
+	<div class="container">
+		<div class="row">
+		    <div ng-show="showmap" class="center">
+				<div><div id="map"></div></div><br>
+    			
+
+  				<div id="parkhere" class="parkbutton"><button style="background-color:#9b59b6" type="button" class="btn btn-primary btn-lg btn-block">Park Now</button></div>
+			</div>
+
+			<div ng-show="showaddressform" class="center">
+					<!-- <div clas> Address:<input type="text" ng-model="address"><br>
+  					<input ng-click="Submit()"  value="Submit"></div> -->
+
+  					<form>
+ 					<div class="form-group">
+    					<label >Street Address</label>
+    					<input ng-model="street" type="text" class="form-control"  placeholder="Street Address">
+  					</div>
+  					<div class="form-group">
+    					<label >City</label>
+    					<input ng-model="city" type="text" class="form-control"  placeholder="City">
+  					</div>
+  					<div class="form-group">
+    					<label >State</label>
+    					<input ng-model="state" type="text" class="form-control"  placeholder="State">
+  					</div>
+  					<div class="form-group">
+    					<label >Zip</label>
+    					<input ng-model="zip" type="text" class="form-control"  placeholder="Zip">
+  					</div>
+  					<div class="form-group">
+    					<label >Times Available</label>
+    					<input ng-model="time1" type="text" class="form-control"  placeholder="Times Available">
+  					</div>
+  					
+ 				    <div class="form-group">
+    					<label for="exampleInputFile">Upload an Image of Your Curb</label>
+    					<input type="file" id="exampleInputFile">
+    					<p class="help-block" style="color:black">Make the image as clear as possible.  Show the whole curb and show the house in the background so it is easily findable.</p>
+  					</div>
+  					<!-- <div class="checkbox">
+    					<label>
+      					<input type="checkbox"> Check me out
+    					</label>
+  					</div> -->
+  						<button ng-click="Submit()" type="submit" class="btn btn-default">Submit</button>
+					</form>
+			</div>
+		</div>
+
+	</div>
+    
+
+  	<!--  <div id="floating-panel">
+      <input id="address" type="textbox" value="Sydney, NSW">
+      <input id="submit" type="button" value="Geocode">
+    </div> -->
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0mw4NLJ7pP3LBhu7zBuis_Xg17GJWxAk&callback=initMap">
+   	</script>
+   	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+   	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.js"></script>
+   	<script src="driveway.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
