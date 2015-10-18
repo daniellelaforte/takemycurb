@@ -1,0 +1,29 @@
+{
+  "name": "takemycurb",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daniellelaforte/takemycurb.git"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/daniellelaforte/takemycurb/issues"
+  },
+  "dependencies": {
+    "express": "~4.13.3",
+    "body-parser": "~1.14.1",
+    "mongoose": "~4.1.11",
+    "passport": "~0.3.0",
+    "passport-google": "~0.3.0",
+    "cookie-parser": "~1.4.0",
+    "express-session": "~1.11.3",
+    "express-json": "~1.0.0",
+    "passport-google-oauth": "~0.2.0"
+  }
+}
