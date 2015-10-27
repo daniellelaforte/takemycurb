@@ -30,7 +30,7 @@ passport.use(new GoogleStrategy({
   clientSecret: GOOGLE_CLIENT_SECRET,
   callbackURL: "http://localhost:3000/auth/google/callback"
 }, function(accesstoken, refreshToken, profile, done) {
-
+  console.log(profile);
   User.findOne({
     googleId: profile.id
     }, function (err, user) {
@@ -94,17 +94,6 @@ app.get('/logout', function(req, res){
 });
 
 
-// Application Configuration \\
-// Data is normally sent in a URL encoded string OR stringified JSON
-// {
-//   name : 'McGillyCuddy',
-//   age  : 120
-// }
-// name=McGillyCuddy&age=20
-
-
-
-// Serving Static Files (typically HTML, CSS, JS, or images)
 
 
 // Routes \\
@@ -118,12 +107,10 @@ app.get('/', function(req, res){
 });
 
 
+app.get('/api/me', function(req, res){
+  res.send(req.user)
+})
 
-// Static file serving will override this route if it is defined BEFORE this route
-// and there is a filename that matches the route defined below
-
-
-// Creating Server and Listening for Connections \\
 var port = 3000;
 
 app.listen(port, function(){

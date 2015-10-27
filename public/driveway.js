@@ -26,7 +26,7 @@ angular.module ('driveway',[])
 				});
 		}		
 
-		var drivewayControllerFunc = function ($scope) {
+		var drivewayControllerFunc = function ($scope, $http) {
 		$scope.showmap = true;
 		var clickedMarkerTitle = {};
 
@@ -42,6 +42,14 @@ angular.module ('driveway',[])
 
 
 		$scope.Submit = function () {
+
+      $http.get('/api/me')
+      .then(function(returnData){
+        $scope.userid = returnData.data.googleId
+        console.log($scope.userid);
+      })
+
+
 			$scope.showaddressform = false;
 			$scope.showmap = true;
 			var parkimage = 'curbtopark.png';
@@ -131,4 +139,4 @@ angular.module ('driveway',[])
 
 
 //Registering the controller: mainController
-angular.module('driveway').controller('drivewayController',['$scope', drivewayControllerFunc])
+angular.module('driveway').controller('drivewayController',['$scope', '$http', drivewayControllerFunc])
