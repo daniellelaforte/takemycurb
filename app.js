@@ -10,7 +10,11 @@ var GOOGLE_CLIENT_ID = '512580275271-gb59krbdvbesvth60cbg45df0aq4dju2.apps.googl
 var GOOGLE_CLIENT_SECRET = 'QD5xxzw04zy2Wiy4uR82riGD';
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
+var userCtrler = require('./controllers/userCtrl');
+var User = require('./models/users');
 
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/allusers')
 
 
 passport.serializeUser(function(user, done) {
@@ -22,18 +26,37 @@ passport.deserializeUser(function(obj, done) {
 });
 
 passport.use(new GoogleStrategy({
-    clientID: GOOGLE_CLIENT_ID,
-    clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/callback"
-}, 
-  function(accesstoken, refreshToken, profile, done) {
-    //  User.findOrCreate({ googleId: profile.id }, function (err, user) {
-    // return done(err, user);
-    // });
-    console.log(profile);
-    return done(null, profile);
-  }
-));
+  clientID: GOOGLE_CLIENT_ID,
+  clientSecret: GOOGLE_CLIENT_SECRET,
+  callbackURL: "http://localhost:3000/auth/google/callback"
+}, function(accesstoken, refreshToken, profile, done) {
+
+  User.findOne({
+    googleId: profile.id
+    }, function (err, user) {
+      if (err) {
+        return done(err, null);
+      }
+      if (user) {
+        return done(null, user);
+      }
+      var user = new User({
+        googleId: profile.id,
+      })
+
+      user.save(function(err) {
+        if (err) {return done(err, null)}
+        return done(null, user);
+      })
+    }
+   );
+}))
+
+
+
+
+
+
 
 // Create Express App Object \\
 var app = express();
@@ -48,6 +71,8 @@ app.use(session({ secret: 'SECRET', resave: true,
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/public') );
+
+
 
 
 app.get('/login', function(req, res) {
@@ -85,6 +110,7 @@ app.get('/logout', function(req, res){
 // Routes \\
 app.get('/', function(req, res){
   if(req.isAuthenticated()){
+   // console.log(req.body);
   res.sendFile('driveway.html', {root : './public', user: req.user});
   } else {
     res.redirect('/login');
