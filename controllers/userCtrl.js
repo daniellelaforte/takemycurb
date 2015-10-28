@@ -17,6 +17,14 @@ var createUser = function(req, res){
 
 }
 
+// var timeFinder = function(req, res){
+
+// 	users.find( function(err, doc){
+// 		res.send(doc)
+// 	} )
+
+// }
+
 
 module.exports = {
 	createUser : createUser,

@@ -4,6 +4,10 @@ var userSchema = mongoose.Schema({
   googleId: {
 	  type: String,
   },
+  startTime: {type: Number},
+  endTime: {type: Number},
+  geoAddress: {type: Object},
+  flag: {type: Boolean}
 });
 
 

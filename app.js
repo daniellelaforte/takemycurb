@@ -52,6 +52,20 @@ passport.use(new GoogleStrategy({
    );
 }))
 
+var timeQuery = function (){
+  User.find(function(err, docs){
+    for (var i in docs){
+      console.log(docs[i].startTime);
+      
+    }
+    });
+
+}
+
+timeQuery();
+
+
+
 
 
 
@@ -92,6 +106,10 @@ app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/login');
 });
+
+app.post('/geocode', function(req, res) {
+  
+})
 
 
 
