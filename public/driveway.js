@@ -62,10 +62,24 @@ angular.module ('driveway',[])
   				geocoder.geocode({'address': address}, function(results, status) {
     			if (status === google.maps.GeocoderStatus.OK) {
       				resultsMap.setCenter(results[0].geometry.location);
-              // console.log(typeof results[0].geometry.location);
+              console.log(results[0].geometry.location);
+
+              var lat = results[0].geometry.location.lat();
+              var lng = results[0].geometry.location.lng();
+
+              var llobj = {lat: lat, lng: lng};
+              
+
+               $http.post('/api/geo', llobj)
+                .then(function(returnData){
+                  console.log(returnData.data.lat, returnData.data.lng);
+                
+                });
+
       				var marker = new google.maps.Marker({
         				map: resultsMap,
-        				position: results[0].geometry.location,
+        				// position: results[0].geometry.location,
+                position: new google.maps.LatLng(lat, lng),
         				title: $scope.street,
         				icon: image,
         				times: $scope.time1

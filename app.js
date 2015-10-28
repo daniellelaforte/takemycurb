@@ -107,9 +107,15 @@ app.get('/logout', function(req, res){
   res.redirect('/login');
 });
 
-app.post('/geocode', function(req, res) {
-  
-})
+app.post('/api/geo', function(req, res) {
+  User.update({googleId: req.user.googleId}, {$set:{geoAddress: req.body}}, function(err, doc){
+    console.log("========", req.body);
+    // res.send(doc);
+    res.send(req.body);
+
+  })
+});
+
 
 
 
@@ -126,6 +132,7 @@ app.get('/', function(req, res){
 
 
 app.get('/api/me', function(req, res){
+
   res.send(req.user)
 })
 
