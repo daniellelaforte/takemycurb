@@ -3,6 +3,9 @@ angular.module ('driveway',[])
 
 		var center1;
 		var map;
+    var lat;
+    var lng;
+
 		function initMap() {
     			// var CO = new google.maps.LatLng(40.018005,-105.278430);
     			var mapOptions = {
@@ -40,6 +43,25 @@ angular.module ('driveway',[])
 			$scope.time1 = "";
 		}
 
+    var markerPlacer = function () {
+      $http.get('/putmarkers')
+        .then(function(returnData){
+          console.log("))))", returnData.data[0].geoAddress);
+          lat = returnData.data[0].geoAddress.lat;
+          lng = returnData.data[0].geoAddress.lng;
+      //     var marker = new google.maps.Marker({
+      //           map: map,
+      //           // position: results[0].geometry.location,
+      //           position: new google.maps.LatLng(lat, lng),
+      //           title: $scope.street,
+      //           icon: image,
+      //           times: $scope.time1
+      // })
+    })
+      };
+
+    markerPlacer();
+
 
 		$scope.Submit = function () {
 
@@ -64,10 +86,10 @@ angular.module ('driveway',[])
       				resultsMap.setCenter(results[0].geometry.location);
               console.log(results[0].geometry.location);
 
-              var lat = results[0].geometry.location.lat();
-              var lng = results[0].geometry.location.lng();
+              // var lat = results[0].geometry.location.lat();
+              // var lng = results[0].geometry.location.lng();
 
-              var llobj = {lat: lat, lng: lng};
+              // var llobj = {lat: lat, lng: lng};
               
 
                $http.post('/api/geo', llobj)

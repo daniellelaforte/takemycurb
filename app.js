@@ -52,17 +52,20 @@ passport.use(new GoogleStrategy({
    );
 }))
 
-var timeQuery = function (){
-  User.find(function(err, docs){
-    for (var i in docs){
-      console.log(docs[i].startTime);
+
+
+// var timeQuery = function (){
+//   User.find(function(err, docs){
+//     // for (var i in docs){
+//     //   console.log(docs[i].startTime);
       
-    }
-    });
+//     // }
 
-}
+//     });
 
-timeQuery();
+// }
+
+// timeQuery();
 
 
 
@@ -132,9 +135,14 @@ app.get('/', function(req, res){
 
 
 app.get('/api/me', function(req, res){
-
   res.send(req.user)
-})
+});
+
+app.get('/putmarkers', function(req, res){
+  User.find(function(err, docs){
+  res.send(docs);
+});
+});
 
 var port = 3000;
 
