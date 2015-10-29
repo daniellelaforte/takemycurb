@@ -6,6 +6,8 @@ angular.module ('driveway',[])
     var lat;
     var lng;
 
+
+
 		function initMap() {
     			// var CO = new google.maps.LatLng(40.018005,-105.278430);
     			var mapOptions = {
@@ -31,6 +33,8 @@ angular.module ('driveway',[])
 
 		var drivewayControllerFunc = function ($scope, $http) {
 		$scope.showmap = true;
+
+    
 		var clickedMarkerTitle = {};
 
 		$scope.showAddressForm = function () {
@@ -43,24 +47,108 @@ angular.module ('driveway',[])
 			$scope.time1 = "";
 		}
 
-    var markerPlacer = function () {
-      $http.get('/putmarkers')
-        .then(function(returnData){
-          console.log("))))", returnData.data[0].geoAddress);
-          lat = returnData.data[0].geoAddress.lat;
-          lng = returnData.data[0].geoAddress.lng;
-      //     var marker = new google.maps.Marker({
-      //           map: map,
-      //           // position: results[0].geometry.location,
-      //           position: new google.maps.LatLng(lat, lng),
-      //           title: $scope.street,
-      //           icon: image,
-      //           times: $scope.time1
-      // })
-    })
-      };
+//     $scope.markerPlacer = function () {
+//       $http.get('/putmarkers')
+//         .then(function(returnData){
+//           console.log("))))", returnData.data[0].geoAddress);
+//           lat = returnData.data[0].geoAddress.lat;
+//           lng = returnData.data[0].geoAddress.lng;
+//            });
 
-    markerPlacer();
+//         $scope.street = "5717 Arapahoe";
+//         $scope.city = "Boulder";
+//         $scope.state = "CO";
+//         $scope.zip = "80303";
+
+
+//         var geocoder = new google.maps.Geocoder();
+//         function geocodeAddress(geocoder, resultsMap) {
+//           $scope.address = $scope.street + " " + $scope.city + " " + $scope.state + " " + $scope.zip;
+//           var address = $scope.address;
+//           geocoder.geocode({'address': address}, function(results, status) {
+//           if (status === google.maps.GeocoderStatus.OK) {
+//               resultsMap.setCenter(results[0].geometry.location);
+//               console.log("***", results[0].geometry.location);
+                
+             
+
+//               var marker = new google.maps.Marker({
+//                 map: resultsMap,
+//                 position: results[0].geometry.location,
+//                 // position: new google.maps.LatLng(lat, lng),
+//                 title: $scope.street,
+//                 icon: image,
+//                 times: $scope.time1
+//               })
+
+//           var contentString = '<div id="content">'+
+//             '<div id="siteNotice">'+
+//             '</div>'+
+//             '<div id="bodyContent">' + 
+//             '<p><b>' + marker.title + '</b><br>' +
+//             'Available: ' + marker.times + '</p>'+
+//             '<img src="curbtopark.png"'+
+//             '</div>'+
+//             '</div>';
+
+
+//         var infowindow = new google.maps.InfoWindow({
+//             content: contentString,
+//             maxWidth: 200
+//               });
+
+
+
+//         google.maps.event.addListener(marker, 'click', function(event) {
+//                 // marker.setMap(null);
+//               clickedMarkerTitle = marker;
+
+//           }); 
+
+//             document.getElementById('parkhere').addEventListener('click', function() {
+//             clickedMarkerTitle.setMap(null);      
+//           });
+                
+//           google.maps.event.addListener(marker, 'click', function(event) {
+//               infowindow.open(map, marker);
+//           });
+
+
+//           } else {
+//               alert('Geocode was not successful for the following reason: ' + status);
+//               }
+//           });
+    
+    
+//     }
+
+
+      
+//         geocodeAddress(geocoder, map);
+
+
+
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+   
+      
+
+    // $scope.markerPlacer();
 
 
 		$scope.Submit = function () {
@@ -78,6 +166,11 @@ angular.module ('driveway',[])
 			var image = 'blackcar.png';
 			$scope.address = $scope.street + " " + $scope.city + " " + $scope.state + " " + $scope.zip;
 
+      $http.get('/api/address')
+                .then(function(returnData){
+                  $scope.address = returnData.data[1].address;
+                // });
+
 			var geocoder = new google.maps.Geocoder();
 				function geocodeAddress(geocoder, resultsMap) {
   				var address = $scope.address;
@@ -86,22 +179,26 @@ angular.module ('driveway',[])
       				resultsMap.setCenter(results[0].geometry.location);
               console.log(results[0].geometry.location);
 
-              // var lat = results[0].geometry.location.lat();
-              // var lng = results[0].geometry.location.lng();
+              var lat = results[0].geometry.location.lat();
+              var lng = results[0].geometry.location.lng();
 
               // var llobj = {lat: lat, lng: lng};
+              // 
               
 
-               $http.post('/api/geo', llobj)
-                .then(function(returnData){
-                  console.log(returnData.data.lat, returnData.data.lng);
+               // $http.post('/api/geo', llobj)
+               //  .then(function(returnData){
+               //    console.log(returnData.data.lat, returnData.data.lng);
                 
-                });
+               //  });
+
+
+               
 
       				var marker = new google.maps.Marker({
         				map: resultsMap,
-        				// position: results[0].geometry.location,
-                position: new google.maps.LatLng(lat, lng),
+        				position: results[0].geometry.location,
+                //position: new google.maps.LatLng(lat, lng),
         				title: $scope.street,
         				icon: image,
         				times: $scope.time1
@@ -155,7 +252,8 @@ angular.module ('driveway',[])
 			
         geocodeAddress(geocoder, map);
 
-
+// I put it here
+});
 
 }
 

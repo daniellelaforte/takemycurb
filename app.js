@@ -138,6 +138,13 @@ app.get('/api/me', function(req, res){
   res.send(req.user)
 });
 
+app.get('/api/address', function(req, res){
+  User.find(function(err, doc){
+    res.send(doc)
+  })
+  
+});
+
 app.get('/putmarkers', function(req, res){
   User.find(function(err, docs){
   res.send(docs);

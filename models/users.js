@@ -7,7 +7,8 @@ var userSchema = mongoose.Schema({
   startTime: {type: Number},
   endTime: {type: Number},
   geoAddress: {type: Object},
-  flag: {type: Boolean}
+  flag: {type: Boolean},
+  address: {type: String}
 });
 
 
