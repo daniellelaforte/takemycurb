@@ -5,6 +5,7 @@ angular.module ('driveway',[])
 		var map;
     var lat;
     var lng;
+  
 
 
 
@@ -53,8 +54,7 @@ angular.module ('driveway',[])
 
       $scope.showaddressform = false;
       $scope.showmap = true;
-      var parkimage = 'curbtopark.png';
-      var caricon = 'blackcar.png';
+     
       $scope.address = $scope.street + " " + $scope.city + " " + $scope.state + " " + $scope.zip;
 
       var ownerobj = {address: $scope.address, startTime: $scope.time1, endTime: $scope.time2, date: $scope.date};
@@ -67,7 +67,14 @@ angular.module ('driveway',[])
     }
 
 
-		$scope.addOwner = function () {
+ 
+
+
+		$scope.addMarker = function (arg) {
+
+
+         var parkimage = 'curbtopark.png';
+         var caricon = 'blackcar.png';
 
       // $http.get('/api/me')
       // .then(function(returnData){
@@ -79,14 +86,12 @@ angular.module ('driveway',[])
                 
                
 
-      $http.get('/api/address')
-                .then(function(returnData){
-                  $scope.address = returnData.data[0].address;
                 // });
 
 			var geocoder = new google.maps.Geocoder();
 				function geocodeAddress(geocoder, resultsMap) {
-  				var address = $scope.address;
+  				// var address = $scope.address;  //this I will need when I finish testing this
+          var address=arg;
   				geocoder.geocode({'address': address}, function(results, status) {
     			if (status === google.maps.GeocoderStatus.OK) {
       				resultsMap.setCenter(results[0].geometry.location);
@@ -161,21 +166,31 @@ angular.module ('driveway',[])
 			
         geocodeAddress(geocoder, map);
 
-// closes the address get
-});
-// closes the owner post
+// // closes the address get
 // });
 
-
-      $scope.street = "";
-      $scope.city = "";
-      $scope.state = "";
-      $scope.zip = "";
-      $scope.time1 = "";
-      $scope.time2 = "";
-      $scope.date = "";
-// closes the addOwner function
+// closes the addMarker function
 }
+
+ $scope.getDocs = function () {
+
+      $http.get('/api/address')
+                .then(function(returnData){
+                  console.log("fromt", returnData.data)
+                  $scope.alldocs = returnData.data;
+
+                  for (var i=0; i<returnData.data.length; i++){
+                    console.log(returnData.data[i].address);
+                    var arg = returnData.data[i].address;
+                    $scope.addMarker(arg);
+                  }
+                });
+
+  }
+
+  $scope.getDocs();
+
+
 
 }
 
