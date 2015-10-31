@@ -110,11 +110,20 @@ app.get('/logout', function(req, res){
   res.redirect('/login');
 });
 
-app.post('/api/geo', function(req, res) {
-  User.update({googleId: req.user.googleId}, {$set:{geoAddress: req.body}}, function(err, doc){
-    console.log("========", req.body);
+// app.post('/api/geo', function(req, res) {
+//   User.update({googleId: req.user.googleId}, {$set:{geoAddress: req.body}}, function(err, doc){
+//     console.log("========", req.body);
+//     // res.send(doc);
+//     res.send(req.body);
+
+//   })
+// });
+
+app.post('/api/owner', function(req, res) {
+  User.update({googleId: req.user.googleId}, {$set:{address: req.body.address, startTime: req.body.startTime, endTime: req.body.endTime}}, function(err, doc){
+    console.log("========", doc);
     // res.send(doc);
-    res.send(req.body);
+    res.send(doc);
 
   })
 });
