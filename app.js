@@ -154,8 +154,7 @@ app.get('/api/address', function(req, res){
     for (var i=0; i<docs.length; i++){
       if ((timenow > docs[i].startTime) && (timenow < docs[i].endTime)){
         User.update({googleId: docs[i].googleId}, {$set:{flag: true}}, function(err, doc){
-          console.log("here", i);
-            if (i==(docs.length)){
+            if (i==(docs.length)){  //closure issue here - this is why it needs to be set to the full docs.length
               console.log("does this run?", docs);
               res.send(docs);
             }
@@ -167,6 +166,18 @@ app.get('/api/address', function(req, res){
   })
   
 });
+
+// app.get('/api/flags', function(req, res){
+//   var timenow = new Date().getTime();
+
+
+
+// })
+
+
+
+
+
 
 // app.get('/putmarkers', function(req, res){
 //   User.find(function(err, docs){

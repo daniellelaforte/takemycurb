@@ -8,7 +8,6 @@ angular.module ('driveway',[])
   
 
 
-
 		function initMap() {
     			// var CO = new google.maps.LatLng(40.018005,-105.278430);
     			var mapOptions = {
@@ -69,12 +68,12 @@ angular.module ('driveway',[])
     }
 
 
- 
+
 
 
 		$scope.addMarker = function (arg) {
 
-
+        
          var parkimage = 'curbtopark.png';
          var caricon = 'blackcar.png';
 
@@ -90,7 +89,7 @@ angular.module ('driveway',[])
 
                 // });
 
-			var geocoder = new google.maps.Geocoder();
+			  var geocoder = new google.maps.Geocoder();
 				function geocodeAddress(geocoder, resultsMap) {
   				// var address = $scope.address;  //this I will need when I finish testing this
           var address=arg;
@@ -184,12 +183,15 @@ angular.module ('driveway',[])
                     console.log(returnData.data[i].address);
                     var arg = returnData.data[i].address;
                     console.log(arg);
+                    arg = "1651 broadway boulder co 80302"
                     $scope.addMarker(arg);
                   }
 
 
 
                 });
+
+
 
   }
 
