@@ -120,7 +120,7 @@ app.get('/logout', function(req, res){
 // });
 
 app.post('/api/owner', function(req, res) {
-  User.update({googleId: req.user.googleId}, {$set:{address: req.body.address, startTime: req.body.startTime, endTime: req.body.endTime}}, function(err, doc){
+  User.update({googleId: req.user.googleId}, {$set:{address: req.body.address, startTime: req.body.startTime, endTime: req.body.endTime, flag: false}}, function(err, doc){
     console.log("========", doc);
     // res.send(doc);
     res.send(doc);
@@ -148,17 +148,34 @@ app.get('/api/me', function(req, res){
 });
 
 app.get('/api/address', function(req, res){
-  User.find(function(err, doc){
-    res.send(doc)
+  var timenow = new Date().getTime();
+  console.log(timenow);
+  User.find(function(err, docs){
+    for (var i=0; i<docs.length; i++){
+      if ((timenow > docs[i].startTime) && (timenow < docs[i].endTime)){
+        User.update({googleId: docs[i].googleId}, {$set:{flag: true}}, function(err, doc){
+          console.log("here", i);
+            if (i==(docs.length)){
+              console.log("does this run?", docs);
+              res.send(docs);
+            }
+
+        })
+      }
+    }
+    // res.send(docs);
   })
   
 });
 
-app.get('/putmarkers', function(req, res){
-  User.find(function(err, docs){
-  res.send(docs);
-});
-});
+// app.get('/putmarkers', function(req, res){
+//   User.find(function(err, docs){
+
+//     console.log(docs.length);
+
+//   res.send(docs);
+// });
+// });
 
 var port = 3000;
 

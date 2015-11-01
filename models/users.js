@@ -8,7 +8,6 @@ var userSchema = mongoose.Schema({
   endTime: {type: Number},
   // geoAddress: {type: Object},
   flag: {type: Boolean},
-  date: {type: String},
   address: {type: String}
 });
 

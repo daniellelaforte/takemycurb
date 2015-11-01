@@ -47,7 +47,7 @@ angular.module ('driveway',[])
 			$scope.zip = "";
 			$scope.time1 = "";
       $scope.time2 = "";
-      $scope.date = "";
+
 		}
 
     $scope.Submit = function () {
@@ -56,8 +56,10 @@ angular.module ('driveway',[])
       $scope.showmap = true;
      
       $scope.address = $scope.street + " " + $scope.city + " " + $scope.state + " " + $scope.zip;
+      $scope.startit = new Date(Number($scope.year), Number($scope.month) - 1, Number($scope.day), Number($scope.time1)).getTime();
+      $scope.stopit =  new Date(Number($scope.year), Number($scope.month) - 1, Number($scope.day), Number($scope.time2)).getTime();
 
-      var ownerobj = {address: $scope.address, startTime: $scope.time1, endTime: $scope.time2, date: $scope.date};
+      var ownerobj = {address: $scope.address, startTime: $scope.startit, endTime: $scope.stopit};
 
       $http.post('/api/owner', ownerobj)
                 .then(function(returnData){
@@ -113,9 +115,9 @@ angular.module ('driveway',[])
         				map: resultsMap,
         				position: results[0].geometry.location,
                 //position: new google.maps.LatLng(lat, lng),
-        				title: $scope.street,
+        				title: "title",
         				icon: caricon,
-        				times: $scope.time1 + "-" + $scope.time2
+        				times: "times"
 
 
       				})
@@ -176,14 +178,17 @@ angular.module ('driveway',[])
 
       $http.get('/api/address')
                 .then(function(returnData){
-                  console.log("fromt", returnData.data)
-                  $scope.alldocs = returnData.data;
+                  console.log("*****", returnData.data)
 
                   for (var i=0; i<returnData.data.length; i++){
                     console.log(returnData.data[i].address);
                     var arg = returnData.data[i].address;
+                    console.log(arg);
                     $scope.addMarker(arg);
                   }
+
+
+
                 });
 
   }
