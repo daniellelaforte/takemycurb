@@ -151,19 +151,19 @@ app.get('/api/address', function(req, res){
   var timenow = new Date().getTime();
   console.log(timenow);
   User.find(function(err, docs){
-    for (var i=0; i<docs.length; i++){
-      if ((timenow > docs[i].startTime) && (timenow < docs[i].endTime)){
-        User.update({googleId: docs[i].googleId}, {$set:{flag: true}}, function(err, doc){
-            if (i==(docs.length)){  //closure issue here - this is why it needs to be set to the full docs.length
-              console.log("does this run?", docs);
+    // for (var i=0; i<docs.length; i++){
+    //   if ((timenow > docs[i].startTime) && (timenow < docs[i].endTime)){
+    //     User.update({googleId: docs[i].googleId}, {$set:{flag: true}}, function(err, doc){
+    //         if (i==(docs.length)){  //closure issue here - this is why it needs to be set to the full docs.length
+    //           console.log("does this run?", docs);
               res.send(docs);
-            }
+            // }
 
         })
-      }
-    }
+    //   }
+    // }
     // res.send(docs);
-  })
+  // })
   
 });
 

@@ -178,13 +178,15 @@ angular.module ('driveway',[])
       $http.get('/api/address')
                 .then(function(returnData){
                   console.log("*****", returnData.data)
+                  var timenow = new Date().getTime();
+                  console.log(timenow);
 
                   for (var i=0; i<returnData.data.length; i++){
-                    console.log(returnData.data[i].address);
-                    var arg = returnData.data[i].address;
-                    console.log(arg);
-                    arg = "1651 broadway boulder co 80302"
-                    $scope.addMarker(arg);
+                    if ((timenow > returnData.data[i].startTime) && (timenow < returnData.data[i].endTime)){
+                          console.log(returnData.data[i].address);
+                          var arg = returnData.data[i].address;
+                          $scope.addMarker(arg);
+                    }
                   }
 
 
