@@ -6,6 +6,7 @@ angular.module ('driveway',[])
     var lat;
     var lng;
   
+  
 
 
 		function initMap() {
@@ -29,12 +30,16 @@ angular.module ('driveway',[])
 			google.maps.event.addDomListener(window, 'resize', function() {
   				map.setCenter(center1);
 				});
+
+     
 		}		
+
+    
 
 		var drivewayControllerFunc = function ($scope, $http) {
 		$scope.showmap = true;
 
-    
+    initMap();
 		var clickedMarkerTitle = {};
 
 		$scope.showAddressForm = function () {
@@ -90,6 +95,7 @@ angular.module ('driveway',[])
                 // });
 
 			  var geocoder = new google.maps.Geocoder();
+        console.log("***/////", geocoder);
 				function geocodeAddress(geocoder, resultsMap) {
   				// var address = $scope.address;  //this I will need when I finish testing this
           var address=arg;
@@ -181,10 +187,14 @@ angular.module ('driveway',[])
                   var timenow = new Date().getTime();
                   console.log(timenow);
 
+
+
+
                   for (var i=0; i<returnData.data.length; i++){
-                    if ((timenow > returnData.data[i].startTime) && (timenow < returnData.data[i].endTime)){
+                    if ((timenow > returnData.data[i].startTime) && ((timenow < returnData.data[i].endTime) && (returnData.data[i].flag==true))){
                           console.log(returnData.data[i].address);
                           var arg = returnData.data[i].address;
+                      
                           $scope.addMarker(arg);
                     }
                   }

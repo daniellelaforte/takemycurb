@@ -120,7 +120,7 @@ app.get('/logout', function(req, res){
 // });
 
 app.post('/api/owner', function(req, res) {
-  User.update({googleId: req.user.googleId}, {$set:{address: req.body.address, startTime: req.body.startTime, endTime: req.body.endTime, flag: false}}, function(err, doc){
+  User.update({googleId: req.user.googleId}, {$set:{address: req.body.address, startTime: req.body.startTime, endTime: req.body.endTime, flag: true}}, function(err, doc){
     console.log("========", doc);
     // res.send(doc);
     res.send(doc);
