@@ -38,6 +38,8 @@ angular.module ('driveway',[])
 
 		var drivewayControllerFunc = function ($scope, $http) {
 		$scope.showmap = true;
+    $scope.parknowshow = true;
+    $scope.leavespotshow = false;
 
     initMap();
 		var clickedMarkerTitle = {};
@@ -53,6 +55,29 @@ angular.module ('driveway',[])
       $scope.time2 = "";
 
 		}
+
+    $scope.parknow = function () {
+      $scope.parknowshow = false;
+      $scope.leavespotshow = true;
+      $http.get('/api/flagoff')
+                .then(function(returnData){
+                  console.log("flagit *****", returnData.data)
+                })
+
+
+    }
+
+     $scope.leavenow = function () {
+      $scope.parknowshow = true;
+      $scope.leavespotshow = false;
+      $http.get('/api/flagon')
+                .then(function(returnData){
+                  console.log("flagit *****", returnData.data)
+                })
+
+
+
+    }
 
     $scope.Submit = function () {
 

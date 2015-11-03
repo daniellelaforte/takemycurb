@@ -174,7 +174,19 @@ app.get('/api/address', function(req, res){
 
 // })
 
+app.get('/api/flagoff', function(req, res){
+  User.update({googleId: req.user.googleId}, {$set:{flag: false}}, function(err, doc){
+    res.send(doc);
 
+});
+});
+
+app.get('/api/flagon', function(req, res){
+  User.update({googleId: req.user.googleId}, {$set:{flag: true}}, function(err, doc){
+    res.send(doc);
+
+});
+});
 
 
 
