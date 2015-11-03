@@ -250,6 +250,7 @@ angular.module ('driveway',[])
 }
 
  $scope.getDocs = function () {
+       console.log("getDocs running");
 
       $http.get('/api/address')
                 .then(function(returnData){
@@ -277,11 +278,14 @@ angular.module ('driveway',[])
 
   }
 
-$scope.getDocs();
-// $interval($scope.getDocs(), 1000);
+// $scope.getDocs();
+
+// $interval($scope.getDocs(), 10000);
+$interval( function(){ $scope.getDocs();} , 3000);
+// $interval( function(){ $scope.callAtInterval(); }, 3000);
 
 
-
+//closes controller
 }
 
 
