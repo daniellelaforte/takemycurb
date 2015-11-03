@@ -36,7 +36,7 @@ angular.module ('driveway',[])
 
     
 
-		var drivewayControllerFunc = function ($scope, $http) {
+		var drivewayControllerFunc = function ($scope, $http, $interval) {
 		$scope.showmap = true;
     $scope.parknowshow = true;
     $scope.leavespotshow = false;
@@ -53,6 +53,11 @@ angular.module ('driveway',[])
 			$scope.zip = "";
 			$scope.time1 = "";
       $scope.time2 = "";
+      $scope.day = "";
+      $scope.startminutes = "";
+      $scope.endminutes = "";
+      $scope.year = "";
+      $scope.month = "";
 
 		}
 
@@ -60,7 +65,7 @@ angular.module ('driveway',[])
       $scope.parknowshow = false;
       $scope.leavespotshow = true;
       $http.get('/api/flagoff')
-                .then(function(returnData){
+                .then(function (returnData){
                   console.log("flagit *****", returnData.data)
                 })
 
@@ -71,13 +76,53 @@ angular.module ('driveway',[])
       $scope.parknowshow = true;
       $scope.leavespotshow = false;
       $http.get('/api/flagon')
-                .then(function(returnData){
+                .then(function (returnData){
                   console.log("flagit *****", returnData.data)
                 })
 
 
+    }
+
+
+
+
+
+    $scope.populateit = function () {
+
+          $http.get('/first')
+            .then(function (returnData){
+              console.log("999", returnData.data);
+
+      })
+
+          $http.get('/second')
+            .then(function (returnData){
+              console.log("999", returnData.data);
+
+      })
+
+          $http.get('/third')
+            .then(function (returnData){
+              console.log("999", returnData.data);
+
+      })
+
+          $http.get('/fourth')
+            .then(function (returnData){
+              console.log("999", returnData.data);
+
+      })
+
+          $http.get('/fifth')
+            .then(function (returnData){
+              console.log("999", returnData.data);
+
+      })
 
     }
+
+    $scope.populateit();
+
 
     $scope.Submit = function () {
 
@@ -85,13 +130,13 @@ angular.module ('driveway',[])
       $scope.showmap = true;
      
       $scope.address = $scope.street + " " + $scope.city + " " + $scope.state + " " + $scope.zip;
-      $scope.startit = new Date(Number($scope.year), Number($scope.month) - 1, Number($scope.day), Number($scope.time1)).getTime();
-      $scope.stopit =  new Date(Number($scope.year), Number($scope.month) - 1, Number($scope.day), Number($scope.time2)).getTime();
+      $scope.startit = new Date(Number($scope.year), Number($scope.month) - 1, Number($scope.day), Number($scope.time1), Number($scope.startminutes)).getTime();
+      $scope.stopit =  new Date(Number($scope.year), Number($scope.month) - 1, Number($scope.day), Number($scope.time2), Number($scope.endminutes)).getTime();
 
       var ownerobj = {address: $scope.address, startTime: $scope.startit, endTime: $scope.stopit};
 
       $http.post('/api/owner', ownerobj)
-                .then(function(returnData){
+                .then(function (returnData){
                   console.log(returnData.data);
 
       })
@@ -232,7 +277,8 @@ angular.module ('driveway',[])
 
   }
 
-  $scope.getDocs();
+$scope.getDocs();
+// $interval($scope.getDocs(), 1000);
 
 
 
@@ -241,4 +287,4 @@ angular.module ('driveway',[])
 
 
 //Registering the controller: mainController
-angular.module('driveway').controller('drivewayController',['$scope', '$http', drivewayControllerFunc])
+angular.module('driveway').controller('drivewayController',['$scope', '$http', '$interval', drivewayControllerFunc])

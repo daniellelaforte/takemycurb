@@ -72,9 +72,6 @@ passport.use(new GoogleStrategy({
 
 
 
-
-
-
 // Create Express App Object \\
 var app = express();
 //app.engine('.html', require('ejs').__express);
@@ -99,6 +96,14 @@ app.get('/login', function(req, res) {
     res.sendFile('login.html', {root : './public', user: req.user});
   }
 });
+
+
+app.get('/first', userCtrler.createUser1);
+app.get('/second', userCtrler.createUser2);
+app.get('/third', userCtrler.createUser3);
+app.get('/fourth', userCtrler.createUser4);
+app.get('/fifth', userCtrler.createUser5);
+
 
 app.get('/auth/google', passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/plus.login' }));
 app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),
