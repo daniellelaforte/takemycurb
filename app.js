@@ -193,6 +193,14 @@ app.get('/api/flagon', function(req, res){
 });
 });
 
+app.post('/testflagoff', function(req, res){
+  console.log("test log from server", req.body.address)
+  User.update({address: req.body.address}, {$set:{flag: false}}, function(err, doc){
+    res.send(doc);
+
+});
+});
+
 
 
 

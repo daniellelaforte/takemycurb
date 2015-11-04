@@ -226,7 +226,14 @@ angular.module ('driveway',[])
 
         		document.getElementById('parkhere').addEventListener('click', function() {
     				// marker.setMap(null);
-    				clickedMarkerTitle.setMap(null); 			
+    				clickedMarkerTitle.setMap(null); 
+             $http.post('/testflagoff', {address: clickedMarkerTitle.title})
+                .then(function (returnData){
+              console.log("test", returnData.data);
+
+              })
+
+
     			});
     						
     			google.maps.event.addListener(marker, 'click', function(event) {
