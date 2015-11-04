@@ -28,7 +28,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new GoogleStrategy({
   clientID: GOOGLE_CLIENT_ID,
   clientSecret: GOOGLE_CLIENT_SECRET,
-  callbackURL: "http://www.takemycurb.com/auth/google/callback"
+  callbackURL: "http://takemycurb.com/auth/google/callback"
 }, function(accesstoken, refreshToken, profile, done) {
   console.log(profile);
   User.findOne({
@@ -226,7 +226,7 @@ app.post('/testflagon', function(req, res){
 // });
 // });
 
-var port = 3000;
+var port = 80;
 
 app.listen(port, function(){
   console.log('Server running on port ' + port);
