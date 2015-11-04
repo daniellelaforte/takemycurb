@@ -201,6 +201,14 @@ app.post('/testflagoff', function(req, res){
 });
 });
 
+app.post('/testflagon', function(req, res){
+  console.log("test log from server", req.body.address)
+  User.update({address: req.body.address}, {$set:{flag: true}}, function(err, doc){
+    res.send(doc);
+
+});
+});
+
 
 
 

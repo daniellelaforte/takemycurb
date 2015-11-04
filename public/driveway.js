@@ -193,7 +193,7 @@ angular.module ('driveway',[])
                 //position: new google.maps.LatLng(lat, lng),
         				title: address,
         				icon: caricon,
-        				times: $scope.startTime
+        				times: $scope.time2 + " " + $scope.endminutes
 
 
       				})
@@ -205,7 +205,7 @@ angular.module ('driveway',[])
       			'</div>'+
       			'<div id="bodyContent">' + 
       			'<p><b>' + marker.title + '</b><br>' +
-      			'Available: ' + marker.times + '</p>'+
+      			'Available Until: ' + marker.times + '</p>'+
       			'<img src="curbtopark.png"'+
       			'</div>'+
       			'</div>';
@@ -235,6 +235,19 @@ angular.module ('driveway',[])
 
 
     			});
+
+
+              document.getElementById('leavehere').addEventListener('click', function() {
+            // marker.setMap(null);
+            // clickedMarkerTitle.setMap(null); 
+             $http.post('/testflagon', {address: clickedMarkerTitle.title})
+                .then(function (returnData){
+              console.log("test", returnData.data);
+
+              })
+
+
+          });
     						
     			google.maps.event.addListener(marker, 'click', function(event) {
        		 		infowindow.open(map, marker);
