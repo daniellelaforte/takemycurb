@@ -62,52 +62,53 @@
 					<!-- <div clas> Address:<input type="text" ng-model="address"><br>
   					<input ng-click="Submit()"  value="Submit"></div> -->
 
-  					<form>
+  					<form class="form-inline bug">
  					<div class="form-group">
-    					<label >Street Address</label>
-    					<input ng-model="street" type="text" class="form-control"  placeholder="Street Address">
+    					<label for="addressform">Street Address</label>
+    					<input id="addressform" ng-model="street" type="text" class="form-control length200"  placeholder="Street Address">
+  					</div><br>
+  					<div class="form-group">
+    					<label for="cityform" >City</label>
+    					<input id="cityform" ng-model="city" type="text" class="form-control lengthfor"  placeholder="City">
   					</div>
   					<div class="form-group">
-    					<label >City</label>
-    					<input ng-model="city" type="text" class="form-control"  placeholder="City">
+    					<label for="stateform" >State</label>
+    					<input id="stateform" ng-model="state" type="text" class="form-control lengthfor"  placeholder="State">
   					</div>
   					<div class="form-group">
-    					<label >State</label>
-    					<input ng-model="state" type="text" class="form-control"  placeholder="State">
-  					</div>
+    					<label for="zipform">Zip</label>
+    					<input id="zipform" ng-model="zip" type="text" class="form-control lengthfor"  placeholder="Zip">
+  					</div><br>
+             
+            <div class="form-group">
+              <label for="monthform">Day Of Rental</label>
+              <input id="monthform" ng-model="month" type="text" class="form-control lengthfor"  placeholder="Month">
+            </div>
+            <div class="form-group">
+              <label for="dayform"></label>
+              <input id="dayform" ng-model="day" type="text" class="form-control lengthfor"  placeholder="Day">
+            </div>
+            <div class="form-group">
+              <label for="yearform"></label>
+              <input id="yearform" ng-model="year" type="text" class="form-control lengthfor"  placeholder="Year">
+            </div><br>
   					<div class="form-group">
-    					<label >Zip</label>
-    					<input ng-model="zip" type="text" class="form-control"  placeholder="Zip">
+    					<label for="starttimeform">Start Time</label>
+    					<input id="starttimeform" ng-model="time1" type="text" class="form-control lengthfor"  placeholder="Hour">
   					</div>
              <div class="form-group">
-              <label >Availability: Year</label>
-              <input ng-model="year" type="text" class="form-control"  placeholder="Year">
-            </div>
+              <label for="startminform"></label>
+              <input id="startminform" ng-model="startminutes" type="text" class="form-control lengthfor"  placeholder="Minutes">
+            </div><br>
             <div class="form-group">
-              <label >Availability: Month</label>
-              <input ng-model="month" type="text" class="form-control"  placeholder="Month">
-            </div>
-            <div class="form-group">
-              <label >Availability: Day</label>
-              <input ng-model="day" type="text" class="form-control"  placeholder="Day">
-            </div>
-  					<div class="form-group">
-    					<label >Availability: Start Time</label>
-    					<input ng-model="time1" type="text" class="form-control"  placeholder="Start Time">
-  					</div>
-             <div class="form-group">
-              <label >Availability: Minutes</label>
-              <input ng-model="startminutes" type="text" class="form-control"  placeholder="Minutes">
-            </div>
-            <div class="form-group">
-              <label >Availability: End Time</label>
-              <input ng-model="time2" type="text" class="form-control"  placeholder="End Time">
+              <label for="endtimeform">End Time</label>
+              <input id="endtimeform" ng-model="time2" type="text" class="form-control lengthfor"  placeholder="Hour">
             </div>
 
              <div class="form-group">
-              <label >Availability: Minutes</label>
-              <input ng-model="endminutes" type="text" class="form-control"  placeholder="Minutes">
-            </div>
+              <label for="endminform"></label>
+              <input id="endminform" ng-model="endminutes" type="text" class="form-control lengthfor"  placeholder="Minutes">
+            </div><br><br>
   					
  				    <div class="form-group">
     					<label for="exampleInputFile">Upload an Image of Your Curb</label>

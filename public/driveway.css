@@ -29,3 +29,19 @@ body {
 
 }
 
+.length200 {
+	width: 300px;
+}
+
+.lengthfor {
+	width: 100px;
+}
+
+.bug {
+	display: inline-block;
+}
+
+.form-group {
+	display: inline-block;
+}
+
