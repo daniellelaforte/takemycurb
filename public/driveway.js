@@ -218,7 +218,7 @@ angular.module ('driveway',[])
                 //position: new google.maps.LatLng(lat, lng),
         				title: address,
         				icon: caricon,
-        				times: $scope.time2 + " " + $scope.endminutes
+        				times: "5pm - 7pm"
 
 
       				})
