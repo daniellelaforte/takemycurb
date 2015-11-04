@@ -226,7 +226,7 @@ app.post('/testflagon', function(req, res){
 // });
 // });
 
-var port = 3000;
+var port = 80;
 
 app.listen(port, function(){
   console.log('Server running on port ' + port);
