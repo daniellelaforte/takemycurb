@@ -103,6 +103,11 @@ app.get('/second', userCtrler.createUser2);
 app.get('/third', userCtrler.createUser3);
 app.get('/fourth', userCtrler.createUser4);
 app.get('/fifth', userCtrler.createUser5);
+app.get('/sixth', userCtrler.createUser6);
+app.get('/seventh', userCtrler.createUser7);
+app.get('/eigth', userCtrler.createUser8);
+app.get('/ninth', userCtrler.createUser9);
+app.get('/tenth', userCtrler.createUser10);
 
 
 app.get('/auth/google', passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/plus.login' }));
@@ -179,19 +184,19 @@ app.get('/api/address', function(req, res){
 
 // })
 
-app.get('/api/flagoff', function(req, res){
-  User.update({googleId: req.user.googleId}, {$set:{flag: false}}, function(err, doc){
-    res.send(doc);
+// app.get('/api/flagoff', function(req, res){
+//   User.update({googleId: req.user.googleId}, {$set:{flag: false}}, function(err, doc){
+//     res.send(doc);
 
-});
-});
+// });
+// });
 
-app.get('/api/flagon', function(req, res){
-  User.update({googleId: req.user.googleId}, {$set:{flag: true}}, function(err, doc){
-    res.send(doc);
+// app.get('/api/flagon', function(req, res){
+//   User.update({googleId: req.user.googleId}, {$set:{flag: true}}, function(err, doc){
+//     res.send(doc);
 
-});
-});
+// });
+// });
 
 app.post('/testflagoff', function(req, res){
   console.log("test log from server", req.body.address)

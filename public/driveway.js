@@ -65,10 +65,10 @@ angular.module ('driveway',[])
     $scope.parknow = function () {
       $scope.parknowshow = false;
       $scope.leavespotshow = true;
-      $http.get('/api/flagoff')
-                .then(function (returnData){
-                  console.log("flagit *****", returnData.data)
-                })
+      // $http.get('/api/flagoff')
+      //           .then(function (returnData){
+      //             console.log("flagit *****", returnData.data)
+      //           })
 
 
     }
@@ -76,10 +76,10 @@ angular.module ('driveway',[])
      $scope.leavenow = function () {
       $scope.parknowshow = true;
       $scope.leavespotshow = false;
-      $http.get('/api/flagon')
-                .then(function (returnData){
-                  console.log("flagit *****", returnData.data)
-                })
+      // $http.get('/api/flagon')
+      //           .then(function (returnData){
+      //             console.log("flagit *****", returnData.data)
+      //           })
 
 
     }
@@ -115,6 +115,31 @@ angular.module ('driveway',[])
       })
 
           $http.get('/fifth')
+            .then(function (returnData){
+              console.log("999", returnData.data);
+
+      })
+              $http.get('/sixth')
+            .then(function (returnData){
+              console.log("999", returnData.data);
+
+      })
+              $http.get('/seventh')
+            .then(function (returnData){
+              console.log("999", returnData.data);
+
+      })
+              $http.get('/eigth')
+            .then(function (returnData){
+              console.log("999", returnData.data);
+
+      })
+              $http.get('/ninth')
+            .then(function (returnData){
+              console.log("999", returnData.data);
+
+      })
+              $http.get('/tenth')
             .then(function (returnData){
               console.log("999", returnData.data);
 
@@ -331,8 +356,8 @@ $scope.clearMarkers = function () {
 
   }
 
-
-$interval( function(){ $scope.getDocs(); } , 5000);
+$scope.getDocs();
+$interval( function(){ $scope.getDocs(); } , 10000);
 
 
 
