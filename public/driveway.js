@@ -5,6 +5,7 @@ angular.module ('driveway',[])
 		var map;
     var lat;
     var lng;
+    var markers =[];
   
   
 
@@ -171,7 +172,7 @@ angular.module ('driveway',[])
           var address=arg;
   				geocoder.geocode({'address': address}, function(results, status) {
     			if (status === google.maps.GeocoderStatus.OK) {
-      				resultsMap.setCenter(results[0].geometry.location);
+      				// resultsMap.setCenter(results[0].geometry.location);
               console.log(results[0].geometry.location);
 
               // var lat = results[0].geometry.location.lat();
@@ -190,12 +191,14 @@ angular.module ('driveway',[])
         				map: resultsMap,
         				position: results[0].geometry.location,
                 //position: new google.maps.LatLng(lat, lng),
-        				title: "title",
+        				title: address,
         				icon: caricon,
-        				times: "times"
+        				times: $scope.startTime
 
 
       				})
+
+            markers.push(marker);
 
       		var contentString = '<div id="content">'+
       			'<div id="siteNotice">'+
@@ -249,8 +252,23 @@ angular.module ('driveway',[])
 // closes the addMarker function
 }
 
+$scope.setMapOnAll = function (map) {
+                      for (var i = 0; i < markers.length; i++) {
+                      markers[i].setMap(map);
+                      }
+                  }
+
+
+$scope.clearMarkers = function () {
+  $scope.setMapOnAll(null);
+  markers = [];
+}
+
  $scope.getDocs = function () {
        console.log("getDocs running");
+       $scope.clearMarkers();
+
+
 
       $http.get('/api/address')
                 .then(function(returnData){
@@ -271,6 +289,21 @@ angular.module ('driveway',[])
                   }
 
 
+                  $scope.setMapOnAll(map);
+
+
+            //   google.maps.event.addListener(marker, 'click', function(event) {
+            //     // marker.setMap(null);
+            //   clickedMarkerTitle = marker;
+
+            //   }); 
+
+            // document.getElementById('parkhere').addEventListener('click', function() {
+            // // marker.setMap(null);
+            // clickedMarkerTitle.setMap(null);      
+            // });
+
+
 
                 });
 
@@ -278,11 +311,11 @@ angular.module ('driveway',[])
 
   }
 
-// $scope.getDocs();
 
-// $interval($scope.getDocs(), 10000);
-$interval( function(){ $scope.getDocs();} , 3000);
-// $interval( function(){ $scope.callAtInterval(); }, 3000);
+$interval( function(){ $scope.getDocs(); } , 5000);
+
+
+
 
 
 //closes controller
