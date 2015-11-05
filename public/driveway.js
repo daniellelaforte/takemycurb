@@ -88,7 +88,7 @@ angular.module ('driveway',[])
 
 
 
-    $scope.populateit = function () {
+    $scope.populate = function () {
 
           $http.get('/first')
             .then(function (returnData){
@@ -147,7 +147,7 @@ angular.module ('driveway',[])
 
     }
 
-    $scope.populateit();
+
 
 
     $scope.Submit = function () {
